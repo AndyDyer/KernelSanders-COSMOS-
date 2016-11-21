@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{05336724-0611-48c7-8c86-c3da0f8e16ea}</ProjectGuid>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <Name>MainBoot</Name>
+    <BinFormat>elf</BinFormat>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <Profile>VMware</Profile>
+    <!-- Looks like this was a mispelled attribute. Replaced by DebugEnabled below.
+    <DebugEnable>true</DebugEnable>
+    -->
+    <DebugEnabled>true</DebugEnabled>
+    <DebugMode>Source</DebugMode>
+    <TraceMode>User</TraceMode>
+    <EnableGDB>False</EnableGDB>
+    <StartCosmosGDB>false</StartCosmosGDB>
+    <VMWareEdition>Player</VMWareEdition>
+    <OutputPath>bin\Debug\</OutputPath>
+    <Name>MainBoot</Name>
+    <Description>Use VMware Player or Workstation to deploy and debug.</Description>
+    <Deployment>ISO</Deployment>
+    <Launch>VMware</Launch>
+    <VisualStudioDebugPort>Pipe: Cosmos\Serial</VisualStudioDebugPort>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hardware\Drivers.csproj">
+      <Name>Drivers</Name>
+      <Project>{087e4250-9450-4de5-b0a0-fb4452be75c3}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include=".\Main.csproj">
+      <Name>Main</Name>
+      <Project>{acbdd6fb-b22f-498a-948d-cec286b031dd}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Cosmos.Core.Plugs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5ae71220097cb983" />
+    <Reference Include="Cosmos.System.Plugs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5ae71220097cb983" />
+    <Reference Include="Cosmos.Debug.Kernel.Plugs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5ae71220097cb983" />
+  </ItemGroup>
+  <!--<ItemGroup>
+    <Content Include="Cosmos.bxrc">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>-->
+  <Import Project="$(MSBuildExtensionsPath)\Cosmos\Cosmos.targets" />
+</Project>
